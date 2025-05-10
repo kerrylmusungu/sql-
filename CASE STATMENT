@@ -1,0 +1,22 @@
+Question:
+Retrieve the product_name, unit_price and a column named "PriceCategory" that categorizes products into three groups: "Low", "Medium", and "High" based on their price ranges. Use the following criteria:
+
+1. "Low" for products with price less than 200.
+2. "Medium" for products with price between 200 and 500.
+3. "High" for products with price greater than 500.
+
+Table: products 
+
+ColumnName          DataType
+product_id          int
+product_name        varchar 
+category            varchar
+unit_price          decimal
+
+Solution:
+SELECT product_name, unit_price,       
+    CASE WHEN unit_price < 200 THEN 'Low'
+    WHEN unit_price >= 200 AND unit_price <= 500 THEN 'Medium'
+    ELSE 'High'
+    END AS PriceCategory
+        FROM products;

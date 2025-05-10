@@ -1,0 +1,29 @@
+Question:
+Retrieve a list of customer_id and customer_name and their corresponding order_id, order_date and order_amount, but only for orders placed between '2023-01-01' and '2023-06-30'.
+
+Table: customers
+
+ColumnName          Datatype           
+customer_id         int 
+customer_name       varchar
+age                 int 
+city                varchar
+email               varchar
+address           varchar
+
+Table: orders
+
+ColumnName      DataType
+order_id        int
+order_date      date
+order_amount    decimal
+customer_id     int
+order_status    varchar
+
+Solutions:
+SELECT 
+    customers.customer_id, customers.customer_name,
+    orders.order_id, orders.order_date, orders.order_amount
+        FROM customers
+            JOIN orders ON customers.customer_id = orders.customer_id
+                WHERE orders.order_date BETWEEN  '2023-01-01' AND '2023-06-30';

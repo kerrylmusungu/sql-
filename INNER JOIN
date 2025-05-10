@@ -1,0 +1,31 @@
+Question:
+Exercise: Retrieve a list of customer_id, customer_name who have placed orders along with information about their orders, including the order_id, order_date and order_amount.
+
+Table: customers
+
+ColumnName          Datatype           
+customer_id         int 
+customer_name       varchar
+age                 int 
+city                varchar
+email               varchar
+address             varchar
+
+Table: orders
+
+ColumnName      DataType
+order_id        int
+order_date      date
+order_amount    decimal
+customer_id     int
+order_status    varchar
+shipping_address   varchar
+
+Solution:
+SELECT 
+    customers.customer_id, customers.customer_name, 
+    orders.order_id, orders.order_date, orders.order_amount
+        FROM customers 
+            INNER JOIN
+                orders 
+                    ON customers.customer_id = orders.customer_id

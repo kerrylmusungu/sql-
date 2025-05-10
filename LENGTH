@@ -1,0 +1,36 @@
+Question:
+Retrieve order_id, order_date and order_amount along with customer_name and customer_id where customer name is of odd length for all customers who ordered.
+
+Table: customers
+
+ColumnName          Datatype           
+customer_id         int 
+customer_name       varchar
+age                 int 
+city                varchar
+email               varchar
+address           varchar
+
+Table: orders
+
+ColumnName      DataType
+order_id        int
+order_date      date
+order_amount    decimal
+customer_id     int
+order_status    varchar
+shipping_address   varchar
+
+Constraints:
+The input tables (customers and orders) contain valid data.
+
+Solution:
+SELECT
+    customers.customer_id, customers.customer_name,
+    orders.order_id, orders.order_date, orders.order_amount
+    FROM 
+        customers
+        JOIN  orders
+            ON orders.customer_id = customers.customer_id
+                WHERE (LENGTH(customers.customer_name)-1)%2 = 0;
+                -- minus 1 because there is a space between names in the column customer_name

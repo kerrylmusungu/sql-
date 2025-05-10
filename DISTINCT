@@ -1,0 +1,14 @@
+Retrieve all unique departments. Display department.
+
+Table: employees
+ 
+ColumnNames		DataType		
+employee_id		int		
+first_name		varchar
+last_name		varchar  
+department		varchar 
+salary			decimal
+manager_id		int
+
+Solution:
+SELECT DISTINCT(department) FROM employees

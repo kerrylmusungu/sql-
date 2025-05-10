@@ -1,0 +1,33 @@
+Question:
+Calculate the number of days between each order_date and '2023-06-01' as "days_since_order". Also display the customer_id, customer_name, order_id and order_date for customers only who have placed orders.
+
+Table: customers
+
+ColumnName          Datatype           
+customer_id         int 
+customer_name       varchar
+age                 int 
+city                varchar
+email               varchar
+address           varchar
+
+Table: orders
+
+ColumnName      DataType
+order_id        int
+order_date      date
+order_amount    decimal
+customer_id     int
+order_status    varchar
+shipping_address   varchar
+
+Constraints:
+The input tables (customers and orders) contain valid data.
+
+Solution:
+SELECT 
+    c.customer_id, c.customer_name, 
+    o.order_id, o.order_date, DATEDIFF('2023-06-01', o.order_date) AS days_since_order
+        FROM customers AS c
+            JOIN orders AS o
+                ON c.customer_id = o.customer_id

@@ -1,0 +1,28 @@
+Question:
+Exercise: Retrieve a list of orders with their order_id, order_date, order_amount  and the corresponding customer information (customer_name and email).
+
+Table: customers
+
+ColumnName          Datatype           
+customer_id         int 
+customer_name       varchar
+age                 int 
+city                varchar
+email               varchar
+address           varchar
+
+Table: orders
+
+ColumnName      DataType
+order_id        int
+order_date      date
+order_amount    decimal
+customer_id     int
+order_status    varchar
+shipping_address   varchar
+
+Solution:
+SELECT
+    o.order_id, o.order_date, o.order_amount, c.customer_name, c.email
+    FROM orders AS o
+        RIGHT JOIN customers AS c ON o.customer_id = c.customer_id

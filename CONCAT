@@ -1,0 +1,27 @@
+Question:
+Retrieve customer_name, customer_id and customer address as "full address" as a column using address and city combined one after the other.
+
+Table: customers
+
+ColumnName          Datatype           
+customer_id         int 
+customer_name       varchar
+age                 int 
+city                varchar
+email               varchar
+address           varchar
+
+Output Format:
+A result set with columns:
+customer_name (varchar)
+customer_id (int)
+full_address (varchar)
+
+Constraints:
+The input table customers contains valid data.
+
+Solution:
+SELECT
+    customer_name, customer_id, CONCAT(address, ', ', city) AS full_address
+    
+    FROM customers;

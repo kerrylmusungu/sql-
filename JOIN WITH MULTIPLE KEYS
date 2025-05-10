@@ -1,0 +1,31 @@
+Question:
+Retrieve customer_id, customer_name and address along with their order_id, order_date, order_amount, order_status and shipping_address.
+
+Table: customers
+
+ColumnName          Datatype           
+customer_id         int 
+customer_name       varchar
+age                 int 
+city                varchar
+email               varchar
+address             varchar
+
+Table: orders
+
+ColumnName      DataType
+order_id        int
+order_date      date
+order_amount    decimal
+customer_id     int
+order_status    varchar
+shipping_address   varchar
+
+Solution:
+SELECT 
+    customers.customer_id, customers.customer_name, customers.address,
+    orders.order_id, orders.order_date, orders.order_amount, orders.order_status, orders.shipping_address
+        FROM customers
+            JOIN orders
+                ON customers.customer_id = orders.customer_id
+                    AND customers.address = orders.shipping_address

@@ -1,0 +1,23 @@
+Question:
+Retrieve pairs of employees who share the same manager. Display first employee_id AS employee1_id, first employee's first_name & last_name combined as employee1_name, second employee_id AS employee2_id, second employee's first_name & last_name combined as as employee2_name and manager_id.
+
+Table: employees
+ 
+ColumnNames		DataType		
+employee_id		int		
+first_name		varchar
+last_name		varchar  
+department		varchar 
+salary			decimal
+manager_id		int
+
+Solution:
+SELECT 
+    e1.employee_id AS employee1_id, CONCAT(e1.first_name, ' ',e1.last_name) AS employee1_name,
+    e2.employee_id AS employee2_id, CONCAT(e2.first_name, ' ',e2.last_name) AS employee2_name, e2.manager_id  
+        FROM employees e1
+            JOIN employees e2
+                ON e1.manager_id = e2.manager_id
+                    AND e1.employee_id < e2.employee_id
+                        WHERE 
+                            e1.manager_id IS NOT NULL;

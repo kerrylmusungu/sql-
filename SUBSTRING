@@ -1,0 +1,18 @@
+Question:
+Retrieve the first 5 characters of categories for all products. Display product_id, product_name and a new column with first 5 characters AS first_5_chars. 
+
+Table: products 
+
+ColumnName          DataType
+product_id          int
+product_name        varchar 
+category            varchar
+unit_price          decimal
+
+Constraints:
+The input table products contains valid data.
+
+Solution:
+SELECT 
+    product_id, product_name, SUBSTRING(category FROM 1 FOR 5) AS first_5_chars
+        FROM products;

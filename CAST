@@ -1,0 +1,21 @@
+Question:
+Calculate total amount for orders with order status = 'Completed' and cast as string with '$' prefix. Display column name as "total_amount_string".
+
+Table: orders
+
+ColumnName      DataType
+order_id        int
+order_date      date
+order_amount    decimal
+customer_id     int
+order_status    varchar
+shipping_address   varchar
+
+Constraints:
+The input table orders contains valid data.
+
+Solution:
+SELECT
+    CONCAT('$',CAST(SUM(order_amount) AS CHAR)) AS total_amount_string
+        FROM orders
+            WHERE order_status = 'Completed';

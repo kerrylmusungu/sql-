@@ -1,0 +1,36 @@
+Question:
+Retrieve the customer_name of customers who have placed orders with a total amount greater than the average amount of all orders.
+
+Table: customers
+
+ColumnName          Datatype           
+customer_id         int 
+customer_name       varchar
+age                 int 
+city                varchar
+email               varchar
+address             varchar
+
+Table: orders
+
+ColumnName      DataType
+order_id        int
+order_date      date
+order_amount    decimal
+customer_id     int
+order_status    varchar
+shipping_address   varchar
+
+Solution
+SELECT customer_name
+    FROM customers
+        WHERE customer_id IN 
+            (
+                SELECT customer_id
+                    FROM orders
+                        GROUP BY customer_id
+                            HAVING SUM(order_amount) > 
+                            (
+                                SELECT AVG(order_amount) FROM orders
+                            )
+            );

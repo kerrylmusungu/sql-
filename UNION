@@ -1,0 +1,29 @@
+Question:
+Create a consolidated list of transactions from both the Orders and Invoices tables. Your result must contain customer_id, order_date as 'transaction_date' named column and the order_amount & total_amount from both tables as 'transaction_amount' named column.
+
+Table: orders
+
+ColumnName      DataType
+order_id        int
+order_date      date
+order_amount    decimal
+customer_id     int
+order_status    varchar
+shipping_address   varchar
+
+Table: invoices
+
+ColumnName      DataType
+invoice_id      int
+customer_id     int
+invoice_date    date
+total_amount    decimal
+
+Solution:
+SELECT
+    customer_id, order_date AS transaction_date, order_amount AS amount
+        FROM orders
+            UNION 
+                SELECT
+                    customer_id, invoice_date AS transaction_date,total_amount AS amount
+                        FROM invoices;

@@ -1,0 +1,32 @@
+Question:
+Retrieve a list of customer_id and customer_name along with the total number of orders as "order_count" they have placed and the total amount as "total_amount" they have spent.
+
+Table: customers
+
+ColumnName          Datatype           
+customer_id         int 
+customer_name       varchar
+age                 int 
+city                varchar
+email               varchar
+address           varchar
+
+Table: orders
+
+ColumnName      DataType
+order_id        int
+order_date      date
+order_amount    decimal
+customer_id     int
+order_status    varchar
+shipping_address   varchar
+
+Solutions: 
+SELECT 
+    customers.customer_id, 
+    customers.customer_name, 
+    COUNT(order_id) AS order_count, 
+    SUM(order_amount) AS total_amount
+        FROM customers
+            LEFT JOIN orders ON customers.customer_id = orders.customer_id
+                 GROUP BY customers.customer_id, customers.customer_name;

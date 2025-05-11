@@ -1,0 +1,21 @@
+Question:
+Retrieve product_id, product_name, unit_price and category that have a price higher than the average price of products within their respective categories.
+
+Table: products 
+
+ColumnName          DataType
+product_id          int
+product_name        varchar 
+category            varchar
+unit_price          decimal
+
+
+Constraints:
+The input table products contains valid data.
+
+Solution:
+SELECT
+     product_id, product_name, unit_price, category
+     FROM products p1
+        WHERE unit_price > (SELECT AVG(unit_price) FROM products p2
+            WHERE p2.category = p1.category);

@@ -1,0 +1,27 @@
+Question:
+Retrieve the top 3 orders with the highest order_amount values, along with their order_id, customer_id, order_date and order_amount. Additionally, assign a unique row number as "row_num"  to each of these orders based on the descending order of order_amount values. 
+
+Hint: Use LIMIT to restrict results to 3 rows
+
+Table: orders
+
+ColumnName      DataType
+order_id        int
+order_date      date
+order_amount    decimal
+customer_id     int
+order_status    varchar
+shipping_address   varchar
+
+Constraints:
+The input table orders contains valid data.
+
+Solution:
+SELECT 
+    ROW_NUMBER() OVER (ORDER BY order_amount DESC) AS row_num,
+    order_id, 
+    customer_id, 
+    order_date,
+    order_amount, 
+        FROM orders
+            LIMIT 3;

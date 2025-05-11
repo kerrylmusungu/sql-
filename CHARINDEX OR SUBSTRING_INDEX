@@ -1,0 +1,22 @@
+Question:
+Exercise: Retrieve the customer_name along with their email as "EmailDomain". 
+
+Note: You may use 'SUBSTRING_INDEX' here to solve the question which is MYSQL compatible.
+
+Table: customers
+
+ColumnName          Datatype           
+customer_id         int 
+customer_name       varchar
+age                 int 
+city                varchar
+email               varchar
+address           varchar
+
+Constraints:
+The input table customers contains valid data.
+
+Solution:
+SELECT 
+    customer_name, SUBSTRING_INDEX(email, '@', -1) AS EmailDomain 
+        FROM customers;

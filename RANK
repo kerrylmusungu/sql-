@@ -1,0 +1,25 @@
+Question:
+Retrieve the first_name, last_name, department and salary for each department, including their rank as "rank" within the department based on salary.
+
+Table: employees
+ 
+ColumnNames		DataType		
+employee_id		int		
+first_name		varchar
+last_name		varchar  
+department		varchar 
+salary			decimal
+manager_id		int
+
+
+Constraints:
+The input table employees contains valid data.
+
+Solution:
+SELECT
+    RANK() OVER (PARTITION BY department ORDER BY salary DESC) AS rank,
+    first_name, 
+    last_name, 
+    salary,
+    department
+        FROM employees;

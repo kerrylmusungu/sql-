@@ -1,0 +1,48 @@
+Exercise:
+Retrieve all orders displaying order_id, order_status, order_amount and month of order_date as "MonthInWords". Also fetch and display customer_id and customer_name who have ordered.
+
+Table: customers
+
+ColumnName          Datatype           
+customer_id         int 
+customer_name       varchar
+age                 int 
+city                varchar
+email               varchar
+address           varchar
+
+Table: orders
+
+ColumnName      DataType
+order_id        int
+order_date      date
+order_amount    decimal
+customer_id     int
+order_status    varchar
+shipping_address   varchar
+
+
+Constraints:
+The input tables (customers and orders) contain valid data.
+
+Solution:
+SELECT
+    orders.order_id, orders.order_amount,
+    (CASE EXTRACT(MONTH FROM orders.order_date)
+        WHEN 1 THEN 'January'
+        WHEN 2 THEN 'February'
+        WHEN 3 THEN 'March'
+        WHEN 4 THEN 'April'
+        WHEN 5 THEN 'May'
+        WHEN 6 THEN 'June'
+        WHEN 7 THEN 'July'
+        WHEN 8 THEN 'August'
+        WHEN 9 THEN 'September'
+        WHEN 10 THEN 'October'
+        WHEN 11 THEN 'November'
+        WHEN 12 THEN 'December'
+    END) AS MonthInWords,orders.order_status,
+    customers.customer_id, customers.customer_name
+        FROM customers
+            JOIN orders
+                ON customers.customer_id = orders.customer_id

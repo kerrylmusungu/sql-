@@ -1,1 +1,38 @@
+Overview:
+Example 1 - Analyzing Sales Growth:
 
+SELECT date, sales_amount, LEAD(sales_amount, 1, 0) OVER (ORDER BY date) AS next_day_sales FROM sales;
+
+Example 2 - Comparing Monthly Revenues:
+
+SELECT month, revenue, LEAD(revenue) OVER (ORDER BY month) AS next_month_revenue FROM monthly_reports;
+
+Example 3 - Detecting Changes in Stock Price:
+
+SELECT date, stock_price, LEAD(stock_price) OVER (ORDER BY date) AS next_day_price_change FROM stock_prices;
+
+
+Question:
+Retrieve a list of products along with their product_name, category and unit_price, including the name as "next_product_name" and price as "next_product_price" of the next higher-priced product within the same category. Additionally add 'X' to name in case where it is the last product in the list as per higher price logic and '0' for the price.
+
+Table: products 
+
+ColumnName          DataType
+product_id          int
+product_name        varchar 
+category            varchar
+unit_price          decimal
+
+
+Constraints:
+The input table products contains valid data.
+
+Solution:
+SELECT
+    product_name,
+    unit_price,
+    COALESCE(LEAD(product_name) OVER (PARTITION BY category ORDER BY unit_price), 'X') AS next_product_name,
+    COALESCE(LEAD(unit_price) OVER (PARTITION BY category ORDER BY unit_price), 0) AS next_product_price,
+    category
+FROM
+    products;

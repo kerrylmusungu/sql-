@@ -1,0 +1,51 @@
+Question:
+Calculate the rank of customers as "rank" based on their total order_amount (from highest to lowest). Display customer_id, customer_name, order_amount and rank for all customers who ordered.
+
+Table: customers
+
+ColumnName          Datatype           
+customer_id         int 
+customer_name       varchar
+age                 int 
+city                varchar
+email               varchar
+address           varchar
+
+Table: orders
+
+ColumnName      DataType
+order_id        int
+order_date      date
+order_amount    decimal
+customer_id     int
+order_status    varchar
+shipping_address   varchar
+
+
+Constraints:
+The input tables (customers and orders) contain valid data.
+
+Solutions:
+WITH amt as
+(
+SELECT
+    c.customer_id as customer_id,
+    c.customer_name as customer_name,
+    sum(o.order_amount) as order_amount
+FROM 
+    orders o
+INNER JOIN
+    customers c
+ON
+    o.customer_id = c.customer_id
+GROUP BY
+    1
+)
+SELECT
+    customer_id,
+    customer_name,
+    order_amount,
+    RANK() OVER(ORDER BY order_amount desc) AS 'rank'
+FROM
+    amt
+;

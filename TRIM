@@ -1,0 +1,20 @@
+Question:
+Retrieve customer information including customer_id, customer_name as "FullName", trimming the address as TrimmedAddress and City.
+
+Table: customers
+
+ColumnName          Datatype           
+customer_id         int 
+customer_name       varchar
+age                 int 
+city                varchar
+email               varchar
+address           varchar
+
+Constraints:
+The input table customers contains valid data.
+
+Solution:
+SELECT
+    customer_id, customer_name AS FullName, TRIM(' ' FROM Address) AS TrimmedAddress, City
+        FROM customers

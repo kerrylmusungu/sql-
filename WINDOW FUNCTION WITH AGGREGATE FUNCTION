@@ -1,0 +1,25 @@
+Question:
+Retrieve the first_name, last_name, salary, average departmental salary as "avg_department_salary", and salary difference as "salary_difference" from the average for each employee.
+
+Table: employees
+ 
+ColumnNames		DataType		
+employee_id		int		
+first_name		varchar
+last_name		varchar  
+department		varchar 
+salary			decimal
+manager_id		int
+
+
+Constraints:
+The input table employees contains valid data.
+
+Solution:
+SELECT
+    first_name, 
+    last_name, 
+    salary, 
+    AVG(salary) OVER (PARTITION  BY department) AS avg_department_salary,
+    salary - AVG(salary) OVER (PARTITION  BY department) AS salary_difference
+        FROM employees;

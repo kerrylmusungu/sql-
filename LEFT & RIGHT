@@ -1,0 +1,23 @@
+Question:
+Retrieve three letter short form of all departments starting from first letter as "ShortDeptName", alongside display employee_id and first_name & last_name combined as "FullName".
+
+Table: employees
+ 
+ColumnNames		DataType		
+employee_id		int		
+first_name		varchar
+last_name		varchar  
+department		varchar 
+salary			decimal
+manager_id		int
+
+Constraints:
+The input table employees contains valid data.
+
+Solution:
+SELECT
+    employee_id,
+    CONCAT(first_name, ' ', last_name) AS FullName,
+    LEFT(department, 3) as ShortDeptName
+FROM
+    employees;

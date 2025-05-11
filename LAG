@@ -1,0 +1,40 @@
+Overview:
+Example 1 - Monitoring Stock Price Trends:
+
+SELECT date, stock_price, LAG(stock_price, 1, 0) OVER (ORDER BY date) AS previous_day_price FROM stock_prices;
+
+Example 2 - Tracking Quarterly Revenue Changes:
+
+SELECT quarter, revenue, LAG(revenue) OVER (ORDER BY quarter) AS previous_quarter_revenue FROM quarterly_reports;
+
+Example 3 - Analyzing Customer Behavior:
+
+SELECT purchase_date, purchase_amount, LAG(purchase_amount) OVER (ORDER BY purchase_date) AS previous_purchase_amount FROM customer_purchases;
+
+Question:
+Retrieves a list of orders along with their order_id, order_date, order_amount and customer_id, and includes the order_date as "previous_order_date" and order_amount as "previous_total_amount" of the previous order made by the same customer. 
+
+Table: orders
+
+ColumnName      DataType
+order_id        int
+order_date      date
+order_amount    decimal
+customer_id     int
+order_status    varchar
+shipping_address   varchar
+
+
+Constraints:
+The input table orders contains valid data
+
+Solution:
+SELECT
+    order_id,
+    order_date,
+    order_amount,
+    LAG(order_date) OVER (PARTITION BY customer_id ORDER BY order_date) AS previous_order_date,
+    LAG(order_amount) OVER (PARTITION BY customer_id ORDER BY order_date) AS previous_total_amount,
+    customer_id
+FROM
+    orders;

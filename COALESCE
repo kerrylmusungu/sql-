@@ -1,0 +1,32 @@
+Question:
+Find out all the employee_id, employee first_name as "employee_first_name", their manager first_name as "manager_name" and manager_id. Employees who do not have a manager or they are highest in hierarchy, assign 'Manager' as the columnar value for "manager_name" and "X" as 'manager_id'.
+
+Input Format: The employees table with the following columns:
+ColumnNames		DataType		
+employee_id		int		
+first_name		varchar
+last_name		varchar  
+department		varchar 
+salary			decimal
+manager_id		int
+
+Output Format: A result set with columns:
+employee_id (int)
+employee_first_name (varchar)
+manager_name (varchar)
+manager_id (varchar)
+
+Constraints:
+The input table employees contains valid data.
+Solution:
+SELECT 
+e.employee_id,
+    e.first_name AS employee_first_name,
+    COALESCE(m.employee_id, 'X') AS manager_id,
+    COALESCE(m.first_name, 'Manager') AS manager_name
+FROM 
+    employees e
+LEFT JOIN 
+    employees m
+ON
+    m.employee_id = e.manager_id;

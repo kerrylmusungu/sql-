@@ -1,0 +1,22 @@
+Question:
+Retrieve product_id, converting product_name to uppercase as "ProductNameUpper", category to lowercase as "CategoryLower".
+
+Input Format: The products table with the following columns:
+
+ColumnName          DataType
+product_id          int
+product_name        varchar 
+category            varchar
+unit_price          decimal
+
+
+Output Format: A result set with columns:
+
+product_id (int)
+ProductNameUpper (varchar)
+CategoryLower (varchar)
+
+Solution:
+SELECT
+    product_id, UPPER(product_name) AS ProductNameUpper, LOWER(category) AS CategoryLower
+        FROM products;

@@ -1,0 +1,41 @@
+Overview:
+WITH cte_name AS (
+    -- Query defining the CTE
+    SELECT ...
+)
+SELECT ...
+FROM cte_name;
+
+Question:
+Retrieve department names, the total number of employees in each department, and the average salary, but include only those departments where the average salary exceeds the overall average salary across all employees.
+
+Table: employees
+ 
+ColumnNames		DataType		
+employee_id		int		
+first_name		varchar
+last_name		varchar  
+department		varchar 
+salary			decimal
+manager_id		int
+
+Solution:
+WITH DepartmentStats AS (
+    SELECT
+    department,
+    COUNT(employee_id) AS total_employees,
+    AVG(salary) AS avg_salary
+    FROM employees
+    GROUP BY department
+),
+OverallStats AS (
+    SELECT AVG(salary) AS overall_avg_salary
+    FROM employees
+)
+SELECT
+    ds.department,
+    ds.total_employees,
+    ds.avg_salary
+FROM DepartmentStats ds
+INNER JOIN OverallStats os
+ON ds.avg_salary > os.overall_avg_salary;
